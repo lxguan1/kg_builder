@@ -36,3 +36,23 @@ The skill must also support **customized schemas and extraction rubrics** — us
 - Schema and rubric customization is the primary extension point — keep it easy to swap in user-defined files.
 - LLM calls are centralized so the underlying model can be swapped (default: `claude-sonnet-4-6`).
 - Output CSV format should follow Neo4j bulk import conventions: `nodes.csv` with `:ID`, `:LABEL` columns and `edges.csv` with `:START_ID`, `:END_ID`, `:TYPE` columns.
+
+## Skill Location
+
+The skill lives at `skills/kg-builder/`. It is a Claude Code plugin skill — no build step required.
+
+## Development Commands
+
+```bash
+# Validate YAML syntax of schema files
+python3 -c "import yaml; yaml.safe_load(open('skills/kg-builder/references/default-schema.yaml'))" && echo "VALID"
+
+# Check skill word count (body should be 700-1000 words)
+wc -w skills/kg-builder/SKILL.md
+
+# Check all referenced files exist
+find skills/kg-builder/references/ -name "*.md" -o -name "*.yaml" | sort
+
+# Test skill locally with Claude Code
+# cc --plugin-dir /Users/huangyuanhao/projects/kg_builder
+```
