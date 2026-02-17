@@ -1,0 +1,59 @@
+---
+# Default Knowledge Graph Schema
+# Override by placing kg_schema.yaml in the working directory.
+
+node_types:
+  Person:
+    description: A named individual
+    properties:
+      - name: string          # canonical name (filled in after Stage 3)
+      - role: string          # optional role/title mentioned in text
+  Organization:
+    description: A company, institution, agency, or group
+    properties:
+      - name: string
+      - industry: string      # optional
+  Location:
+    description: A geographic place, region, or address
+    properties:
+      - name: string
+      - country: string       # optional
+  Event:
+    description: A named occurrence with temporal bounds
+    properties:
+      - name: string
+      - date: string          # optional; ISO 8601 if known
+  Concept:
+    description: An abstract idea, theory, technology, or product
+    properties:
+      - name: string
+
+edge_types:
+  WORKS_FOR:
+    description: Person works for or is employed by Organization
+    source: Person
+    target: Organization
+  FOUNDED_BY:
+    description: Organization was founded by Person
+    source: Organization
+    target: Person
+  LOCATED_IN:
+    description: Entity is geographically located in Location
+    source: [Person, Organization, Event]
+    target: Location
+  PARTICIPATED_IN:
+    description: Person or Organization participated in Event
+    source: [Person, Organization]
+    target: Event
+  CAUSED_BY:
+    description: Event or Concept was caused by another entity
+    source: [Event, Concept]
+    target: [Person, Organization, Event, Concept]
+  MENTIONS:
+    description: Generic relationship when a more specific type does not apply
+    source: any
+    target: any
+  RELATED_TO:
+    description: Fallback for implied or unclear relationships
+    source: any
+    target: any
