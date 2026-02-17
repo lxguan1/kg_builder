@@ -16,7 +16,8 @@ No Python libraries required — all reasoning is done via LLM prompts.
 ## Installation
 
 ```
-/plugin add https://github.com/yuanhao96/kg_builder
+/plugin marketplace add https://github.com/yuanhao96/kg_builder
+/plugin install kg-builder 
 ```
 
 ## Usage
