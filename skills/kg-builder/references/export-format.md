@@ -8,19 +8,19 @@ Stage 4 writes two CSV files using Claude's Write tool.
 1. `:ID` — the entity's canonical_id (e.g., `e1`)
 2. `:LABEL` — the entity type from the schema (e.g., `Person`)
 3. `name` — the canonical_text from Stage 3
-4. Additional property columns from the schema (one column per property; empty string if unknown)
+4. Additional property columns from the schema — only include properties that were actually extracted; omit columns with no data
 5. `ontology_id` — the mapped ontology ID from Stage 3, or empty string
 
 **Header row example:**
 ```
-:ID,:LABEL,name,role,industry,country,date,ontology_id
+:ID,:LABEL,name,ontology_id
 ```
 
 **Data row examples:**
 ```
-e1,Person,Marie Curie,physicist,,,,"Q7186"
-e2,Location,Warsaw,,,Poland,,"Q270"
-e3,Organization,University of Paris,,education,,,"Q209842"
+e1,Person,Marie Curie,"Q7186"
+e2,Location,Warsaw,"Q270"
+e3,Organization,University of Paris,"Q209842"
 ```
 
 ### Rules
@@ -83,8 +83,3 @@ Report any orphaned edge references to the user.
 
 ---
 
-After writing, commit:
-git add skills/kg-builder/references/export-format.md
-git commit -m "feat: add CSV export format specification"
-
-Report: confirm file written and committed.

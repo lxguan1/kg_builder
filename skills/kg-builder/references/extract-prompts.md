@@ -41,7 +41,9 @@ Format:
 ### Filling in {DOCUMENT}
 
 Insert the full contents of the input document.
-For documents longer than ~8,000 words, process in overlapping chunks of ~4,000 words (500-word overlap) and merge entity lists afterward, deduplicating by `text` + `type`.
+For documents longer than ~8,000 words, process in overlapping chunks of ~4,000 words (500-word overlap):
+1. Run Pass 1 on each chunk to get per-chunk entity lists. Assign globally unique ids (chunk 1: e1–eN, chunk 2: eN+1–eM, etc.). Merge all entity lists.
+2. Run Pass 2 on EACH CHUNK separately using only the entities extracted from that chunk. After all chunks, merge the triple lists. Duplicate triples (same source text + relation + target text) should be deduplicated, keeping the first occurrence.
 
 ---
 

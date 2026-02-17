@@ -6,23 +6,19 @@ node_types:
   Person:
     description: A named individual
     properties:
-      - name: string          # canonical name (filled in after Stage 3)
-      - role: string          # optional role/title mentioned in text
+      - name: string
   Organization:
     description: A company, institution, agency, or group
     properties:
       - name: string
-      - industry: string      # optional
   Location:
     description: A geographic place, region, or address
     properties:
       - name: string
-      - country: string       # optional
   Event:
     description: A named occurrence with temporal bounds
     properties:
       - name: string
-      - date: string          # optional; ISO 8601 if known
   Concept:
     description: An abstract idea, theory, technology, or product
     properties:
