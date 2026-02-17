@@ -43,7 +43,7 @@ Check the working directory for customization files:
 | `kg_schema.yaml` | Graph schema (node types, edge types) | `references/default-schema.yaml` |
 | `kg_rubric.md` | Extraction guidelines | `references/default-rubric.md` |
 
-To check: use the Glob tool with pattern `kg_schema.yaml` and `kg_rubric.md`.
+To check: run the Glob tool twice — once with pattern `kg_schema.yaml`, once with pattern `kg_rubric.md`.
 
 If neither file exists and the user described a schema/rubric inline, use their description verbatim in place of the file content.
 
@@ -95,7 +95,7 @@ If Branch B produces warnings, surface them to the user before continuing (even 
 Run in order:
 1. **Pass 1** — deduplication clustering
 2. **Pass 2** — update triples to use canonical ids (mechanical, no LLM call)
-3. **Pass 3** — ontology mapping (only if user provided an ontology)
+3. **Pass 3** — ontology mapping (only if user provided an ontology file named `kg_ontology.txt` or `kg_ontology.yaml` in the working directory, or described an ontology inline during Step 0)
 
 **Output:** Resolved entity list, resolved triple list, validated schema.
 
@@ -121,6 +121,15 @@ Knowledge graph complete.
   nodes.csv  — N nodes  (kg_output/nodes.csv)
   edges.csv  — M edges  (kg_output/edges.csv)
 ```
+
+---
+
+## Error Handling
+
+- **Invalid JSON from LLM:** If a stage produces malformed JSON, re-run that stage once. If it fails again, show the raw output to the user and ask whether to retry or abort.
+- **Interactive mode — Edit:** When the user selects "Edit", ask them to describe the changes in plain English (e.g., "remove entity e3", "change the relation on triple 2 to FOUNDED_BY"). Apply the described changes to the JSON manually, then continue.
+- **Interactive mode — Re-run:** Discard the current stage output entirely and re-run the stage prompt with the original inputs.
+- **Referential integrity failure (Stage 4):** If any `:START_ID` or `:END_ID` in edges.csv has no corresponding `:ID` in nodes.csv, report the orphaned edge IDs to the user and ask whether to remove them or abort.
 
 ---
 
