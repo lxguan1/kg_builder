@@ -63,6 +63,9 @@ DOCUMENT:
 ENTITIES ALREADY IDENTIFIED:
 {ENTITIES}
 
+CITATION KEYS AVAILABLE:
+{CITATION_KEYS}
+
 Task: Extract all relationships between the entities listed above.
 Only use entity ids from the ENTITIES list above. Do not create new entity ids.
 For each relationship, record:
@@ -70,13 +73,14 @@ For each relationship, record:
   - relation: relationship label (uppercase, underscore-separated)
   - target_id: id of the target entity
   - evidence: copy the supporting sentence verbatim from the DOCUMENT — use the exact characters as they appear; do not paraphrase, condense, or rephrase
+  - citation_keys: list the keys from CITATION KEYS AVAILABLE that appear in or immediately adjacent to the evidence sentence; use [] if none
 
 Output ONLY valid JSON. Do not include explanation or commentary.
 
 Format:
 {
   "triples": [
-    { "source_id": "e1", "relation": "BORN_IN", "target_id": "e2", "evidence": "..." }
+    { "source_id": "e1", "relation": "BORN_IN", "target_id": "e2", "evidence": "...", "citation_keys": ["[14]"] }
   ]
 }
 ```
@@ -84,6 +88,11 @@ Format:
 ### Filling in {ENTITIES}
 
 Insert the JSON output from Pass 1.
+
+### Filling in {CITATION_KEYS}
+
+- If `kg_output/citation_map.json` exists and is non-empty: insert a newline-separated list of all keys (e.g. `[14]`, `(Smith et al., 2020)`).
+- Otherwise: insert `none`.
 
 ---
 

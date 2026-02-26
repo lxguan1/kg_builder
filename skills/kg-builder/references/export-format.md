@@ -39,22 +39,24 @@ e3,Organization,University of Paris,"Q209842"
 3. `:TYPE` — the relation label (e.g., `WORKS_FOR`)
 4. `evidence` — the supporting sentence from Stage 1
 5. `evidence_location` — 1-based line number of the evidence sentence in the source document; populated by the post-processing script below, leave empty when writing
+6. `references` — the citation keys from Stage 1 `citation_keys` field, semicolon-separated (e.g. `"[14]; [15]"`); write raw keys when creating the file, or empty string if none; expanded to full reference strings by the post-processing script below
 
 **Header row example:**
 ```
-:START_ID,:END_ID,:TYPE,evidence,evidence_location
+:START_ID,:END_ID,:TYPE,evidence,evidence_location,references
 ```
 
 **Data row examples:**
 ```
-e1,e3,WORKS_FOR,"Marie Curie joined the University of Paris faculty in 1906.",42
-e1,e2,BORN_IN,"Marie Curie was born in Warsaw in 1867.",17
+e1,e3,WORKS_FOR,"Marie Curie joined the University of Paris faculty in 1906.",42,""
+e1,e2,BORN_IN,"Marie Curie was born in Warsaw in 1867. [14]",17,"Smith J, Jones A. Title. Journal. 2020;12(3):45-67."
 ```
 
 ### Rules
 - Relation label in `:TYPE` must match a label defined in the schema.
 - `evidence` must be the verbatim sentence from the document, double-quoted.
 - `evidence_location` is populated by the location detection script; write an empty value when creating the file.
+- `references` is written as raw semicolon-separated citation keys and expanded by the citation expansion script; write empty string if the triple has no citations.
 - No self-loops (`:START_ID` must differ from `:END_ID`).
 - Duplicate rows (same START, END, TYPE) are allowed only if evidence differs.
 
@@ -121,6 +123,49 @@ with open(EDGES_PATH, "w", encoding="utf-8-sig", newline="") as f:
     writer.writerows(rows)
 
 print("Evidence locations written to", EDGES_PATH)
+PYEOF
+```
+
+After running the evidence location script, run the citation expansion script to replace raw citation keys in `references` with full reference strings from `kg_output/citation_map.json`:
+
+```bash
+python3 << 'PYEOF'
+import csv, json, os
+
+EDGES_PATH = "kg_output/edges.csv"
+CITATION_MAP_PATH = "kg_output/citation_map.json"
+
+if not os.path.exists(CITATION_MAP_PATH):
+    print("No citation_map.json found; skipping reference expansion.")
+    exit()
+
+with open(CITATION_MAP_PATH, "r", encoding="utf-8") as f:
+    citation_map = json.load(f)
+
+if not citation_map:
+    print("citation_map is empty; skipping reference expansion.")
+    exit()
+
+rows = []
+with open(EDGES_PATH, "r", encoding="utf-8-sig", newline="") as f:
+    reader = csv.DictReader(f)
+    fieldnames = list(reader.fieldnames)
+    if "references" not in fieldnames:
+        fieldnames.append("references")
+    for row in reader:
+        raw = row.get("references", "")
+        if raw:
+            keys = [k.strip() for k in raw.split(";") if k.strip()]
+            expanded = [citation_map.get(k, k) for k in keys]
+            row["references"] = " | ".join(expanded)
+        rows.append(row)
+
+with open(EDGES_PATH, "w", encoding="utf-8-sig", newline="") as f:
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(rows)
+
+print("Citation references expanded in", EDGES_PATH)
 PYEOF
 ```
 
