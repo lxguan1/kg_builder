@@ -6,7 +6,8 @@ A Claude Code plugin that builds knowledge graphs from plain text or Markdown do
 
 Give it a document, get back a knowledge graph. The plugin runs a four-stage LLM pipeline:
 
-1. **Extract** — identifies entities (Person, Organization, Location, Event, Concept) and relationships
+0. **Citations** — scans the document's reference section and builds a citation key → full reference mapping
+1. **Extract** — identifies entities (Person, Organization, Location, Event, Concept) and relationships, including which citations support each relationship
 2. **Schema** — infers or validates a graph schema from the extracted content
 3. **Resolve** — deduplicates entity surface forms and maps to canonical names
 4. **Export** — writes `kg_output/nodes.csv` and `kg_output/edges.csv` in [Neo4j bulk-import format](https://neo4j.com/docs/operations-manual/current/tools/neo4j-admin/neo4j-admin-import/)
@@ -35,8 +36,9 @@ The skill will ask whether to run **interactively** (confirm at each stage) or *
 
 ```
 kg_output/
-├── nodes.csv    # :ID, :LABEL, name, ontology_id
-└── edges.csv    # :START_ID, :END_ID, :TYPE, evidence, evidence_location
+├── nodes.csv         # :ID, :LABEL, name, ontology_id
+├── edges.csv         # :START_ID, :END_ID, :TYPE, evidence, evidence_location, references
+└── citation_map.json # citation key → full reference mapping (empty object if no citations)
 ```
 
 Compatible with Neo4j, NetworkX, Gephi, and any tool that accepts CSV edge lists.
