@@ -70,6 +70,19 @@ Write edges.csv with the header and one row per resolved triple.
 Default output location: `kg_output/nodes.csv` and `kg_output/edges.csv`.
 Create the `kg_output/` directory if it does not exist (use Bash: `mkdir -p kg_output`).
 
+After writing both files, re-encode them with a UTF-8 BOM so that Excel, Google Sheets, and other tools auto-detect the encoding correctly:
+
+```bash
+python3 -c "
+for fname in ['kg_output/nodes.csv', 'kg_output/edges.csv']:
+    with open(fname, 'r', encoding='utf-8') as f:
+        content = f.read()
+    with open(fname, 'w', encoding='utf-8-sig', newline='') as f:
+        f.write(content)
+print('Re-encoded as UTF-8 with BOM.')
+"
+```
+
 ---
 
 ## Verification
