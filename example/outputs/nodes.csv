@@ -1,89 +1,85 @@
-:ID,:LABEL,name,ontology_id
-e1,CellType,beta cells,beta cells
-e2,CellType,CD8+ T cells,CD8+ T cells
-e3,CellType,CD4+ T cells,CD4+ T cells
-e4,CellType,regulatory T cells,regulatory T cells
-e5,CellType,tissue-resident T cells,tissue-resident T cells
-e6,CellType,plasmacytoid dendritic cells,plasmacytoid dendritic cells
-e7,CellType,antigen-presenting cells,antigen-presenting cells
-e8,CellType,neutrophils,neutrophils
-e9,CellType,alpha cells,alpha cells
+﻿:ID,:LABEL,name,ontology_id
+e1,CellType,beta cells,
+e2,CellType,CD8+ T cells,
+e3,CellType,CD4+ T cells,
+e4,CellType,antigen-presenting cells,
+e5,CellType,alpha cells,
+e6,CellType,neutrophils,
+e7,CellType,plasmacytoid dendritic cells,
+e8,CellType,tissue-resident T cells,
+e9,CellType,regulatory T cells,
 e10,CellType,naive T cells,
-e11,Disease,type 1 diabetes,type 1 diabetes
-e12,Disease,insulitis,insulitis
-e13,Disease,lupus,
+e11,Disease,type 1 diabetes,
+e12,Disease,insulitis,
+e13,Disease,islet autoimmunity,
 e14,Disease,hypophysitis,
 e15,Disease,thyroiditis,
 e16,Disease,adrenal disease,
-e17,Gene,MDA5,MDA5
-e18,Gene,TYK2,TYK2
-e19,Gene,PTPN2,PTPN2
-e20,Gene,Bcl2l1,Bcl2l1
-e21,Gene,IRE1α,IRE1α
-e22,Gene,XBP1,XBP1
-e23,Gene,JNK1,
-e24,Gene,NF-κB,NF-κB
-e25,Gene,ERAP1,ERAP1
-e26,Protein,insulin,insulin
-e27,Protein,proinsulin,proinsulin
-e28,Protein,pre-proinsulin,pre-proinsulin
-e29,Protein,HLA Class I,HLA Class I
-e30,Protein,HLA Class II,HLA Class II
-e31,Protein,PD-L1,PD-L1
-e32,Protein,PD-1,PD-1
-e33,Protein,IFN-α,IFN-α
-e34,Protein,IFN-γ,IFN-γ
-e35,Protein,IL-1β,IL-1β
-e36,Protein,TNF-α,TNF-α
-e37,Protein,CCL2,CCL2
-e38,Protein,CXCL10,CXCL10
-e39,Protein,GAD65,GAD65
-e40,Protein,IA-2,IA-2
-e41,Protein,IAPP,
-e42,Protein,TXNIP,TXNIP
-e43,Protein,GLP-1,GLP-1
-e44,Protein,chromogranin-A,chromogranin-A
-e45,Protein,secretogranin-5,
-e46,Protein,urocortin-3,
-e47,BiologicalProcess,unfolded protein response,unfolded protein response
-e48,BiologicalProcess,ER stress,ER stress
-e49,BiologicalProcess,apoptosis,apoptosis
-e50,BiologicalProcess,antigen presentation,antigen presentation
-e51,BiologicalProcess,crinophagy,crinophagy
-e52,BiologicalProcess,transpeptidation,transpeptidation
-e53,BiologicalProcess,islet inflammation,insulitis
-e54,BiologicalProcess,chemokine release,
-e55,BiologicalProcess,peripheral tolerance,peripheral tolerance
-e56,BiologicalProcess,oxidative damage,
-e57,BiologicalProcess,DRiP generation,
-e58,BiologicalProcess,neoepitope generation,
-e59,BiologicalProcess,post-translational modification,
-e60,BiologicalProcess,beta cell death,apoptosis
-e61,BiologicalProcess,T cell priming,
-e62,AnatomicalStructure,islets,islets
-e63,AnatomicalStructure,pancreas,
-e64,AnatomicalStructure,endoplasmic reticulum,endoplasmic reticulum
-e65,AnatomicalStructure,pancreatic lymph nodes,pancreatic lymph nodes
-e66,AnatomicalStructure,bloodstream,
-e67,AnatomicalStructure,gut,
-e68,AnatomicalStructure,spleen,
-e69,AnatomicalStructure,crinosomes,crinosomes
+e17,Disease,lupus,
+e18,Gene,MDA5,
+e19,Gene,TYK2,
+e20,Gene,PTPN2,
+e21,Gene,Bcl2l1/Bcl-xL,
+e22,Gene,IRE1α,
+e23,Gene,XBP1,
+e24,Gene,JNK1,
+e25,Gene,ERAP1,
+e26,Protein,insulin,
+e27,Protein,proinsulin,
+e28,Protein,pre-proinsulin,
+e29,Protein,chromogranin-A,
+e30,Protein,secretogranin-5,
+e31,Protein,urocortin-3,
+e32,Protein,proconvertases,
+e33,Protein,HLA Class I,
+e34,Protein,HLA Class II,
+e35,Protein,PD-L1,
+e36,Protein,PD-1,
+e37,Protein,IFN-α,
+e38,Protein,IFN-γ,
+e39,Protein,IL-1β,
+e40,Protein,TNF-α,
+e41,Protein,CCL2,
+e42,Protein,CXCL10,
+e43,Protein,GAD65,
+e44,Protein,IA-2,
+e45,Protein,TXNIP,
+e46,Protein,GLP-1,
+e48,BiologicalProcess,unfolded protein response,
+e49,BiologicalProcess,ER stress,
+e50,BiologicalProcess,apoptosis,
+e51,BiologicalProcess,islet inflammation,
+e52,BiologicalProcess,neoepitope generation,
+e53,BiologicalProcess,antigen presentation,
+e54,BiologicalProcess,crinophagy,
+e55,BiologicalProcess,transpeptidation,
+e56,BiologicalProcess,post-translational modification,
+e57,BiologicalProcess,defective ribosomal product generation,
+e58,BiologicalProcess,chemokine release,
+e59,BiologicalProcess,beta cell death,
+e61,BiologicalProcess,proinsulin processing,
+e62,BiologicalProcess,T cell priming,
+e63,BiologicalProcess,oxidative damage,
+e64,AnatomicalStructure,islets,
+e65,AnatomicalStructure,pancreas,
+e67,AnatomicalStructure,pancreatic lymph nodes,
+e69,AnatomicalStructure,crinosomes,
 e70,AnatomicalStructure,secretory granules,
-e71,AnatomicalStructure,exosomes,
-e72,Pathogen,Coxsackievirus B,Coxsackievirus B
-e73,Biomarker,C-peptide,C-peptide
+e72,Pathogen,Coxsackievirus B,
+e73,Biomarker,C-peptide,
 e74,Biomarker,microRNAs,
-e75,Biomarker,autoantibodies,autoantibodies
-e76,Biomarker,IFN-α signature,IFN-α signature
-e77,Biomarker,beta cell-specific methylation DNA marks,
-e78,Therapy,ursodeoxycholic acid,ursodeoxycholic acid
-e79,Therapy,verapamil,verapamil
-e80,Therapy,GLP-1 agonists,GLP-1 agonists
-e81,Therapy,anti-PD-1/PD-L1 antibodies,anti-PD-1/PD-L1 antibodies
-e82,Therapy,JAK/TYK2/STAT inhibitors,JAK/TYK2/STAT inhibitors
-e83,Therapy,immunotherapies,
+e75,Biomarker,autoantibodies,
+e76,Biomarker,beta cell-specific methylation DNA marks,
+e77,Biomarker,IFN-α signature,
+e78,Therapy,ursodeoxycholic acid,
+e79,Therapy,verapamil,
+e80,Therapy,GLP-1 agonists,
+e81,Therapy,anti-PD-1 antibodies,
+e82,Therapy,anti-PD-L1 antibodies,
+e83,Therapy,JAK/TYK2/STAT inhibitors,
 e84,Therapy,bone marrow transplantation,
-e85,GeneticVariant,HLA Class II risk alleles,HLA Class II risk alleles
-e86,GeneticVariant,MDA5 variants,MDA5 variants
-e87,GeneticVariant,TYK2 variants,TYK2 variants
-e88,GeneticVariant,PTPN2 variants,PTPN2 variants
+e85,GeneticVariant,HLA Class II risk alleles,
+e86,GeneticVariant,MDA5 variants,
+e87,GeneticVariant,TYK2 variants,
+e88,GeneticVariant,PTPN2 variants,
+e89,Biomarker,IAPP,
